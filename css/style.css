@@ -124,14 +124,14 @@ nav ul li a{
 
 .marketing .boxes .message:nth-child(2) .content{
 	background:url('../images/box2.gif') top right;
-	background-color:#005900;
+	background-color:#666;
 	padding-left:130px;
 	width:115px;
 }
 
 .marketing .boxes .message:nth-child(3) .content{
 	background:url('../images/box3.gif') top right;
-	background-color:#005900;
+	background-color:#666;
 	padding-left:130px;
 	width:115px;
 }
