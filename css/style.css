@@ -147,6 +147,8 @@ nav ul li a{
 	color:white;
 	margin:10px 0px 0px -30px;
 	overflow:hidden;
+	height:20px;
+	width:330px;
 }
 
 .carousel .message h2{

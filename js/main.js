@@ -22,6 +22,19 @@
 
 		var messageBoxShow = function( elem ) 
 		{
+			var src = $(elem).find('img').attr('src');
+
+			$('.marketing').animate({
+				opacity: .2
+			}, 'fash', function() {
+				$(this).css({
+					'background': 'url(' + src +')'
+				})
+				.animate({
+					opacity: 1
+				});
+			});
+
 			$(elem).animate({
 				height: '200px',
 				width: '450px'
@@ -30,23 +43,33 @@
 			$(elem).removeClass("hidden").addClass("shown");
 		};
 
-		var messageBoxToggle = function()
-		{	
-			console.log('hey');
-		};
-
 		var messageBoxes = $(this).children();
+
+		var hideAll = function(){
+
+			messageBoxes.each(function( index )
+			{
+				$(this).css('width','330px');
+				$(this).css('height','20px');
+				$(this).removeClass('shown').addClass('hidden');
+
+			});
+		};
 
 		messageBoxes.each(function( index ) 
 		{
 			var that = this;
 
-			messageBoxHide(that);
+			//messageBoxHide(that);
 
 			var messageTitle = $(this).find('h2');
 
 			messageTitle.bind('click', function()
 			{
+				clearInterval(autoPlay);
+
+				hideAll();
+
 				if ($(that).hasClass('hidden')) {
 
 					messageBoxShow(that);
@@ -56,13 +79,14 @@
 					messageBoxHide(that);
 
 				}
-				
+
+				window.setTimeout("autoPlay", 2000);
 			});
 		});
 
 		messageBoxShow( $(messageBoxes.get( current )) );
 
-		setInterval(function(){
+		var autoPlay = setInterval(function(){
 
 			var number = current;
 		
@@ -98,6 +122,8 @@
 			current = number;
 
 		},5000);
+
+		autoPlay();
 	}
 
 }( jQuery ));
