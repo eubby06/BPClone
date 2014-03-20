@@ -27,7 +27,7 @@
 
 			$('.marketing').animate({
 				opacity: .2
-			}, 'fash', function() {
+			}, 'fast', function() {
 				$(this).css({
 					'background': 'url(' + src +') center no-repeat'
 				})
