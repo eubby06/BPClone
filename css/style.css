@@ -96,7 +96,7 @@ nav ul li a{
 .marketing {
 	height:550px;
 	padding-top:30px;
-	background-image:url('../images/mad_dog_sr2013_1260x660.jpg');
+	background-image:url('../images/mad_dog_sr2013_1260x660.jpg') center no-repeat;
 	clear:both;
 }
 

@@ -4,6 +4,7 @@
 
 		var current = 0;
 		var operation = 'add';
+		var clickNext;
 
 		var settings = $.extend({
 			min: 0,
@@ -28,7 +29,7 @@
 				opacity: .2
 			}, 'fash', function() {
 				$(this).css({
-					'background': 'url(' + src +')'
+					'background': 'url(' + src +') center no-repeat'
 				})
 				.animate({
 					opacity: 1
@@ -45,17 +46,6 @@
 
 		var messageBoxes = $(this).children();
 
-		var hideAll = function(){
-
-			messageBoxes.each(function( index )
-			{
-				$(this).css('width','330px');
-				$(this).css('height','20px');
-				$(this).removeClass('shown').addClass('hidden');
-
-			});
-		};
-
 		messageBoxes.each(function( index ) 
 		{
 			var that = this;
@@ -66,21 +56,25 @@
 
 			messageTitle.bind('click', function()
 			{
+
+				var toHideIndex = current;
+
 				clearInterval(autoPlay);
 
-				hideAll();
+				var toHide = $(messageBoxes.get( toHideIndex ));
+
+				if (current != index) {
+					messageBoxHide(toHide);
+				}
 
 				if ($(that).hasClass('hidden')) {
 
 					messageBoxShow(that);
 
-				} else {
-
-					messageBoxHide(that);
-
 				}
 
-				window.setTimeout("autoPlay", 2000);
+				current = index;
+
 			});
 		});
 
@@ -88,42 +82,40 @@
 
 		var autoPlay = setInterval(function(){
 
-			var number = current;
+			var next = current;
 		
 			switch(operation)
 			{
 				case 'add':
-					if (number < settings.max) {
-						number = number + 1;
+					if (next < settings.max) {
+						next = next + 1;
 					}
 					
-					if (number == settings.max) {
+					if (next == settings.max) {
 						operation = 'minus';
 					}
 				break;
 
 				case 'minus':
-					if (number > settings.min) {
-						number = number - 1;
+					if (next > settings.min) {
+						next = next - 1;
 					}
 					
-					if (number == settings.min) {
+					if (next == settings.min) {
 						operation = 'add';
 					}
 				break;
 			}
 
 			var toHide = $(messageBoxes.get( current ));
-			var toShow = $(messageBoxes.get( number ));
+			var toShow = $(messageBoxes.get( next ));
 
 			messageBoxHide(toHide);
 			messageBoxShow(toShow);
 
-			current = number;
+			current = next;
 
-		},5000);
-
-		autoPlay();
+		}, 5000);
 	}
 
 }( jQuery ));
